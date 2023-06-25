@@ -1,0 +1,45 @@
+---
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import FarmStory from "./FarmStory.astro";
+---
+
+<SectionLayout title="Our Story" id="about">
+  <div class="mt-8 grid gap-8 gap-y-20 md:grid-cols-2">
+    <div class="flex flex-col gap-8">
+      <h3 class="text-xl font-bold">Bean There, Roasted That</h3>
+      <p>
+        Roasting coffee is a delicate and precise art that transforms raw green
+        coffee beans into the aromatic and flavorful beans we know and love. The
+        roasting process involves carefully controlling the temperature, time,
+        and airflow to achieve the perfect balance between developing the beans'
+        flavors and preserving their unique characteristics. As the beans are
+        heated, they undergo a series of chemical reactions that bring out their
+        complex flavors and aromas. The skilled roasters closely monitor the
+        process, using their expertise to determine the optimal roasting profile
+        for each batch of beans. Whether it's a light roast with bright acidity
+        and delicate floral notes or a dark roast with rich caramelized flavors,
+        the roasting process plays a crucial role in unlocking the full
+        potential of the coffee beans.
+      </p>
+      <img src="/assets/img/bean-roaster.jpg" alt="" class="rounded-lg" />
+    </div>
+    <div class="flex flex-col-reverse gap-8 md:flex-col">
+      <img src="/assets/img/bean-fruit.jpg" alt="" class="rounded-lg"/>
+      <p>
+        At our coffee bean company, we take great pride in our roasting process,
+        ensuring that every batch of beans is roasted to perfection. We source
+        the finest green coffee beans from reputable farmers around the world,
+        carefully selecting those with exceptional quality and flavor profiles.
+        Our experienced roasters meticulously craft each roast, using their
+        knowledge and expertise to bring out the inherent qualities of the
+        beans. They pay close attention to factors such as roasting time,
+        temperature, and the unique characteristics of each coffee origin,
+        resulting in beans that are consistently flavorful and satisfying. With
+        our commitment to quality and passion for the art of roasting, we strive
+        to deliver a remarkable coffee experience to our customers, cup after
+        cup.
+      </p>
+    </div>
+  </div>
+  <FarmStory />
+</SectionLayout>

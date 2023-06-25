@@ -1,0 +1,49 @@
+---
+import BlendsDisplay from "../components/home/BlendsDisplay.astro";
+import Contact from "../components/home/Contact.astro";
+import Equipment from "../components/home/Equipment.astro";
+import EquipmentCard from "../components/home/EquipmentCard.astro";
+import Hero from "../components/home/Hero.astro";
+import OurStory from "../components/home/OurStory.astro";
+import Partners from "../components/home/Partners.astro";
+import ProductCard from "../components/home/ProductCard.astro";
+import Testimonials from "../components/home/Testimonials.astro";
+import Footer from "../components/navigation/Footer.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout title="Home" description="">
+  <Hero />
+
+  <BlendsDisplay>
+    <ProductCard
+      title="Dark Roast"
+      roastProps="Dark, Aromatic, Bitter"
+      description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quibusdam illo neque pariatur, asperiores magni?"
+      img="/assets/img/dark-roast.webp"
+    />
+    <ProductCard
+      title="Medium Roast"
+      roastProps="Something, Rounded"
+      description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quibusdam illo neque pariatur, asperiores magni?"
+      img="/assets/img/medium-roast.webp"
+    />
+  </BlendsDisplay>
+
+  <Equipment>
+    <EquipmentCard title="Drip Coffee" img="assets/img/drip.png" />
+    <EquipmentCard title="French Press" img="assets/img/french-press.png" />
+    <EquipmentCard
+      title="Coffee Machines"
+      img="assets/img/coffee-machine.png"
+    />
+  </Equipment>
+
+  <OurStory />
+
+  <Partners />
+
+  <Testimonials />
+
+  <Contact />
+</PageLayout>

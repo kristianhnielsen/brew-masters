@@ -1,0 +1,16 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getPosts } from "../../../sanity/index";
+import BlogPostCard from "../../components/blog/BlogPostCard.astro";
+
+const blogPosts = await getPosts();
+---
+
+<PageLayout title="Blog" description="">
+  <section class="mx-4 md:mx-auto mt-12 grid max-w-prose">
+    <h1 class="md:text-2xl text-2xl font-bold">Brew Masters Blog</h1>
+    <div class="grid gap-8 border-t-2 pt-2 mt-8 border-midnight">
+      {blogPosts.map((post) => <BlogPostCard {...post} />)}
+    </div>
+  </section>
+</PageLayout>

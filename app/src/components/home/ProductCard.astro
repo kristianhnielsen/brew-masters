@@ -1,0 +1,17 @@
+---
+import ButtonWithArrow from "../ButtonWithArrow.astro";
+const { title, description, roastProps, img } = Astro.props;
+---
+
+<div class="grid max-w-xs grid-rows-4">
+  <h3 class="text-xl font-semibold">{title}</h3>
+  <p class="font-semibold">{roastProps}</p>
+  <p>{description}</p>
+  <a href="/#contact"><ButtonWithArrow>Buy Now</ButtonWithArrow></a>
+
+  <img
+    src={img}
+    alt=""
+    class="row-span-full max-h-60 justify-self-center object-cover object-center md:h-full"
+  />
+</div>

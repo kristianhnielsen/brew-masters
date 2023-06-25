@@ -1,0 +1,8 @@
+---
+const { title, id } = Astro.props;
+---
+
+<section class="mx-4 mt-24 grid" id={id}>
+  {title && <h2 class="justify-self-center text-3xl font-semibold">{title}</h2>}
+  <slot />
+</section>

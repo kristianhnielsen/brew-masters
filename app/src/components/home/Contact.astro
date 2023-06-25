@@ -1,0 +1,59 @@
+---
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import ButtonWithArrow from "../ButtonWithArrow.astro";
+import ButtonWithIcon from "../ButtonWithIcon.astro";
+---
+
+<SectionLayout title="Contact Us" id="contact">
+  <div class="mt-8 grid grid-cols-1 justify-items-center md:grid-cols-2">
+    <form action="" class="flex max-w-sm flex-col gap-8">
+      <h3 class="text-xl font-bold">Contact us to get brewing today!</h3>
+      <label class="flex flex-col gap-1 font-semibold">
+        Name
+        <input
+          type="text"
+          placeholder="Name"
+          class="rounded border-2 border-slate-400 p-2"
+          required
+        />
+      </label>
+      <label class="flex flex-col gap-1">
+        E-mail
+        <input
+          type="text"
+          placeholder="E-mail"
+          class="rounded border-2 border-slate-400 p-2"
+          required
+        />
+      </label>
+
+      <label class="flex flex-col gap-1">
+        I'm interested in
+        <select class="rounded border-2 border-slate-400 p-2">
+          <option value="beans">Beans</option>
+          <option value="equipment">Equipment</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label class="flex flex-col gap-1">
+        Message (optional)
+        <textarea
+          placeholder="Give us some more details..."
+          class="rounded border-2 border-slate-400 p-2"
+          cols="20"
+          rows="5"></textarea>
+      </label>
+      <ButtonWithArrow type="submit" class="w-fit">Contact Me</ButtonWithArrow>
+    </form>
+    <iframe
+      class="max-w-full self-center rounded-md"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444899.652668719!2d10.173956959713005!3d55.93478771901007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4652533c5c803d23%3A0x4dd7edde69467b8!2sCopenhagen%2C%20Denmark!5e0!3m2!1sen!2s!4v1686457458270!5m2!1sen!2s"
+      width="600"
+      height="450"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</SectionLayout>

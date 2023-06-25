@@ -1,0 +1,39 @@
+---
+const { title, authorName, authorSlug, publishedAt, slug, image, authorImage } =
+  Astro.props;
+import FormattedDate from "../../utils/FormattedDate.astro";
+import { urlFor } from "../../../sanity/image";
+import { Image } from "@sanity/types";
+---
+
+<article class="grid grid-cols-10 gap-4 group duration-300 ease-out">
+  <a href={`/blog/${slug}`} class="col-span-4 md:col-span-2">
+    <img
+      src={urlFor(image).quality(10).url()}
+      alt=""
+      class="rounded-lg aspect-square h-full transition-all object-cover w-full grayscale group-hover:grayscale-0"
+    />
+  </a>
+  <div class="flex flex-col col-span-6 md:col-span-8">
+    <FormattedDate
+      date={new Date(publishedAt)}
+      class="font-semibold text-slate-400 text-sm"
+    />
+    <a
+      href={`/blog/${slug}`}
+      class="font-bold hover:text-brew text-ellipsis overflow-y-hidden transition-colors"
+      ><h3>{title}</h3></a
+    >
+    <div class="flex gap-4 flex-row items-center mt-4">
+      <img
+        src={urlFor(authorImage).quality(1).url()}
+        alt=""
+        class="rounded-full object-cover aspect-square w-8 hidden md:inline-block"
+      />
+      <a
+        class="hover:opacity-100 opacity-70 transition-opacity"
+        href={`/blog/author/${authorSlug}`}>{authorName}</a
+      >
+    </div>
+  </div>
+</article>

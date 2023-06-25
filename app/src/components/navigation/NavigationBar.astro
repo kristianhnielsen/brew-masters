@@ -1,0 +1,101 @@
+---
+import SkipToContent from "./SkipToContent.astro";
+const urlIncludes = (path: string): boolean => (Astro.url.pathname.includes(path))
+---
+
+<header
+  class="sticky top-0 z-20 flex h-16 flex-row items-center justify-between bg-brew bg-gradient-to-r from-midnight from-65% to-85% px-8 text-cloud md:from-45% md:to-70%"
+>
+  <SkipToContent />
+
+  <a href="/" class="flex w-1/2 items-center gap-4 fill-none stroke-cloud p-4">
+    <svg
+      class="aspect-square w-12"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 20H10.9433M10.9433 20H11.0567M10.9433 20C10.9622 20.0002 10.9811 20.0002 11 20.0002C11.0189 20.0002 11.0378 20.0002 11.0567 20M10.9433 20C7.1034 19.9695 4 16.8468 4 12.9998V8.92285C4 8.41305 4.41305 8 4.92285 8H17.0767C17.5865 8 18 8.41305 18 8.92285V9M11.0567 20H18M11.0567 20C14.8966 19.9695 18 16.8468 18 12.9998M18 9H19.5C20.8807 9 22 10.1193 22 11.5C22 12.8807 20.8807 14 19.5 14H18V12.9998M18 9V12.9998M15 3L14 5M12 3L11 5M9 3L8 5"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+    Brew Masters
+  </a>
+
+  <nav
+    data-visible="false"
+    aria-expanded="false"
+    aria-label="navigation"
+    class="absolute left-0 top-0 z-10 flex w-full translate-y-0 flex-col items-center gap-12 bg-midnight pb-4 pt-24 text-lg font-bold text-cloud duration-300 ease-out data-[visible='false']:-translate-y-full md:static md:flex-row md:justify-end md:bg-transparent md:p-0"
+  >
+    <ul class="flex list-none flex-col gap-8 text-center md:flex-row">
+      <li>
+        <a href="/" class="hover:underline">Home</a>
+      </li>
+      <li>
+        <a href="/blog" class:list={[urlIncludes("/blog") ?? "underline"  ,"hover:underline"]}>Blog</a>
+      </li>
+      <li>
+        <a href="/#products" class="hover:underline">Products</a>
+      </li>
+      <li>
+        <a href="/#about" class="hover:underline">About Us</a>
+      </li>
+      <li>
+        <a href="/#contact" class="hover:underline">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  <button
+    class="group z-40 flex aspect-square w-12 cursor-pointer flex-col justify-evenly p-2 md:hidden"
+    id="hamburger"
+    aria-label="hamburger menu"
+  >
+    <bar
+      class="h-1 w-full rounded-full bg-cloud transition-all duration-300 ease-in-out group-aria-expanded:translate-y-2 group-aria-expanded:-rotate-45"
+    ></bar>
+    <bar
+      class="h-1 w-full rounded-full bg-cloud transition-all duration-300 ease-in-out group-aria-expanded:invisible"
+    ></bar>
+    <bar
+      class="h-1 w-full rounded-full bg-cloud transition-all duration-300 ease-in-out group-aria-expanded:-translate-y-2 group-aria-expanded:rotate-45"
+    ></bar>
+  </button>
+</header>
+
+<script>
+  const hamburgerButton = document.querySelector("#hamburger");
+  const navigation = document.querySelector("nav");
+  const navLinks = document.querySelectorAll("nav > ul > li > a");
+  const md = 768;
+
+  // if not mobile view, then show data-visible as true
+  // this is purely for aethstetics, it has no effects on JS or CSS otherwise
+  if (window.innerWidth >= md) {
+    navigation?.setAttribute("data-visible", "true");
+  }
+
+  // All navigation links in hamburger menu closes the menu when clicked
+  navLinks.forEach((link) =>
+    link.addEventListener("click", () => { 
+      if (window.innerWidth < md) {
+        navigation?.setAttribute("data-visible", "false");
+        hamburgerButton?.setAttribute("aria-expanded", "false");
+      }
+    })
+  );
+
+  // Hamburger menu button - open/close toggle
+  hamburgerButton?.addEventListener("click", () => {
+    const visibility = navigation?.getAttribute("data-visible");
+
+    if (visibility === "false") {
+      navigation?.setAttribute("data-visible", "true");
+      hamburgerButton?.setAttribute("aria-expanded", "true");
+    } else if (visibility === "true") {
+      navigation?.setAttribute("data-visible", "false");
+      hamburgerButton?.setAttribute("aria-expanded", "false");
+    }
+  });
+</script>

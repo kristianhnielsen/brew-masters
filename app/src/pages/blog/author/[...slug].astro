@@ -1,0 +1,39 @@
+---
+import { PortableText } from "astro-portabletext";
+import { getAuthors, getPostFromAuthor } from "../../../../sanity/index";
+import { urlFor } from "../../../../sanity/image";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import SectionLayout from "../../../layouts/SectionLayout.astro";
+import BlogPostCard from "../../../components/blog/BlogPostCard.astro";
+
+export async function getStaticPaths() {
+  const authors = await getAuthors();
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: author,
+  }));
+}
+
+const author = Astro.props;
+const posts = await getPostFromAuthor(author.name);
+---
+
+<PageLayout title={`${author.name} Bio`} description="">
+  <article class="gap-4 mx-4 max-w-prose md:mx-auto grid mt-12 text-midnight">
+    <img
+      src={urlFor(author.image).url()}
+      class="rounded-full w-1/2 md:max-w-sm aspect-square object-cover"
+    />
+    <h1 class="text-3xl font-bold">{author.name}</h1>
+    <PortableText value={author.bio} class="" />
+  </article>
+
+  <section class="mx-4 mt-12 grid">
+    <h2 class="text-xl font-semibold">
+      {`${author.name}'s Blog Posts`}
+    </h2>
+    <div class="grid gap-8 mt-8 mx-4 md:mx-auto max-w-prose">
+      {posts.map((post) => <BlogPostCard {...post} />)}
+    </div>
+  </section>
+</PageLayout>

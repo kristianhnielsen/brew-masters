@@ -1,0 +1,62 @@
+---
+import { PortableText } from "astro-portabletext";
+import { getAuthors, getPosts } from "../../../sanity/index";
+import { urlFor } from "../../../sanity/image";
+import PageLayout from "../../layouts/PageLayout.astro";
+import FormattedDate from "../../utils/FormattedDate.astro";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const {
+  authorName,
+  authorSlug,
+  authorImage,
+  slug,
+  title,
+  publishedAt,
+  body,
+  image,
+} = Astro.props;
+---
+
+<PageLayout title={`${title} - Brew Master Blog`} description="">
+  <article class="mx-4 max-w-prose md:mx-auto grid text-midnight mt-12">
+    <img
+      src={urlFor(image).url()}
+      alt=""
+      class="max-h-56 md:max-h-96 rounded-lg w-full object-cover object-center"
+    />
+    <h1 class="text-4xl leading-none font-bold mt-4">{title}</h1>
+    <meta-data class="flex gap-2 items-center mt-4">
+      <img
+        src={urlFor(authorImage).quality(1).url()}
+        alt=""
+        class="rounded-full aspect-square w-12"
+      />
+      <a
+        class="hover:opacity-100 opacity-70 transition-opacity"
+        href={`/blog/author/${authorSlug}`}>{authorName}</a
+      >
+      &middot;
+      <FormattedDate date={new Date(publishedAt)} class="opacity-70" />
+    </meta-data>
+    <div
+      class="prose contents prose-h2:text-xl prose-h2:m-0 prose-p:m-0 prose-h2:mt-8 mt-12"
+    >
+      <PortableText value={body} />
+    </div>
+    <div class="flex mt-16">
+      <a
+        href="/blog"
+        class="transition-opacity duration-300 ease-out hover:opacity-70"
+        >&larr; Back To Brew Master's Blog</a
+      >
+    </div>
+  </article>
+</PageLayout>
