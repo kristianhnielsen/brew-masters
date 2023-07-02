@@ -6,15 +6,12 @@ import PageLayout from "../../../layouts/PageLayout.astro";
 import SectionLayout from "../../../layouts/SectionLayout.astro";
 import BlogPostCard from "../../../components/blog/BlogPostCard.astro";
 
-export async function getStaticPaths() {
-  const authors = await getAuthors();
-  return authors.map((author) => ({
-    params: { slug: author.slug },
-    props: author,
-  }));
-}
+const authors = await getAuthors();
+const { slug } = Astro.params;
+const page = authors.find((author) => author.slug === slug);
+if (!page) return Astro.redirect("/404");
+const author = page;
 
-const author = Astro.props;
 const posts = await getPostFromAuthor(author.name);
 ---
 
