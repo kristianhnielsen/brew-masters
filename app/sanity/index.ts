@@ -35,13 +35,15 @@ const postProps = `{
 
 // uses GROQ to query content: https://www.sanity.io/docs/groq
 export async function getPosts(): Promise<Post[]> {
-  const posts = await client.fetch(`*[_type == "post"]${postProps}`);
+  const posts = await client.fetch(
+    `*[_type == "post"] | order(publishedAt desc, title)${postProps}`
+  );
   return posts;
 }
 
 export async function getPostFromAuthor(authorName: string): Promise<Post[]> {
   const posts = await client.fetch(
-    `*[_type == "post" && author->name == "${authorName}"]${postProps}`
+    `*[_type == "post" && author->name == "${authorName}"] | order(publishedAt desc, title)${postProps}`
   );
   return posts;
 }

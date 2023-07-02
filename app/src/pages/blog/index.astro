@@ -4,11 +4,6 @@ import { getPosts } from "../../../sanity/index";
 import BlogPostCard from "../../components/blog/BlogPostCard.astro";
 
 const blogPosts = await getPosts();
-// Sort by newest published
-blogPosts.sort(
-  (a, b) =>
-    new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf()
-);
 ---
 
 <PageLayout title="Blog" description="">
