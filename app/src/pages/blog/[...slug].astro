@@ -5,24 +5,12 @@ import { urlFor } from "../../../sanity/image";
 import PageLayout from "../../layouts/PageLayout.astro";
 import FormattedDate from "../../utils/FormattedDate.astro";
 
-export async function getStaticPaths() {
-  const posts = await getPosts();
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
-}
-
-const {
-  authorName,
-  authorSlug,
-  authorImage,
-  slug,
-  title,
-  publishedAt,
-  body,
-  image,
-} = Astro.props;
+const posts = await getPosts();
+const { slug } = Astro.params;
+const page = posts.find((post) => post.slug === slug);
+if (!page) return Astro.redirect("/404");
+const { authorName, authorSlug, authorImage, title, publishedAt, body, image } =
+  page;
 ---
 
 <PageLayout title={`${title} - Brew Master Blog`} description="">

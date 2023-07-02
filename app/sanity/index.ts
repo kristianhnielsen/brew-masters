@@ -1,10 +1,10 @@
-import { DatetimeDefinition, Image, PortableTextBlock } from "@sanity/types";
+import { Image, PortableTextBlock } from "@sanity/types";
 import { client } from "./client";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 type Post = {
   authorName: string;
   authorSlug: string;
+  authorImage: Image;
   title: string;
   slug: string;
   publishedAt: string;
