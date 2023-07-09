@@ -20,6 +20,16 @@ type Author = {
   image: Image;
 };
 
+type Product = {
+  name: string;
+  slug: string;
+  highlight: boolean;
+  price: number;
+  image: Image;
+  type: string;
+  description: string;
+};
+
 const postProps = `{
     "authorName": author->name,
     "authorSlug": author->slug.current,
@@ -32,6 +42,23 @@ const postProps = `{
     "image": mainImage.asset->url,
 
 }`;
+
+const productProps = `{
+    name,
+    "slug": slug.current,
+    price,
+    highlight,
+    "image": image.asset -> url,
+    "type": type -> title,
+    description,
+  }`;
+
+const authorProps = `{
+    name,
+    "slug": slug.current,
+    bio,
+    "image": image.asset->url
+  }`;
 
 // uses GROQ to query content: https://www.sanity.io/docs/groq
 export async function getPosts(): Promise<Post[]> {
@@ -49,21 +76,27 @@ export async function getPostFromAuthor(authorName: string): Promise<Post[]> {
 }
 
 export async function getAuthors(): Promise<Author[]> {
-  const authors = await client.fetch(`*[_type == "author"]{
-    name,
-    "slug": slug.current,
-    bio,
-    "image": image.asset->url
-  }`);
+  const authors = await client.fetch(`*[_type == "author"]${authorProps}`);
   return authors;
 }
 
 export async function getAuthor(name: string): Promise<Author> {
-  const author = await client.fetch(`*[_type == "author" && name == "${name}"]{
-    name,
-    "slug": slug.current,
-    bio,
-    "image": image.asset->url
-  }`);
+  const author = await client.fetch(
+    `*[_type == "author" && name == "${name}"]${authorProps}`
+  );
   return author;
+}
+
+export async function getProducts(): Promise<Product[]> {
+  const products = await client.fetch(
+    `*[_type == "product"] | order(highlight desc) ${productProps}`
+  );
+  return products;
+}
+
+export async function getProductsOfType(type: string): Promise<Product[]> {
+  const products = await client.fetch(
+    `*[_type == "product" && type -> title == "${type}"]${productProps}`
+  );
+  return products;
 }
