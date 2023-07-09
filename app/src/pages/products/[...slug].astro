@@ -7,43 +7,60 @@ const products = await getProducts();
 const { slug } = Astro.params;
 const page = products.find((product) => product.slug === slug);
 if (!page) return Astro.redirect("/404");
-const { name, description, image, type, price } = page;
+const { name, description, image, type, price, flavor } = page;
 ---
 
 <PageLayout title={name} description="">
-    <section class="mt-8 max-w-md md:mx-auto grid gap-8 mx-4">
+    <section class="mt-8 max-w-md md:mx-auto grid gap-4 mx-4">
         <a href="/products" class="hover:opacity-60 transition-opacity"
             >&larr; Back to products</a
         >
         <img src={urlFor(image).url()} alt="" class="max-h-80" />
         <h1 class="font-bold text-xl">{name}</h1>
-        <p class="text-white p-2 rounded bg-brew opacity-60 font-semibold">
+        <p
+            class="text-white p-2 rounded bg-brew shadow bg-opacity-60 font-semibold"
+        >
             Category: {type}
         </p>
+        {
+            type === "Beans" && (
+                <p class="p-2 rounded bg-midnight bg-opacity-5 shadow font-semibold">
+                    Flavor: {flavor}
+                </p>
+            )
+        }
         <p>{description}</p>
 
         <form
             oninput={`result.value = "$" + parseFloat(${price} * qty.value).toFixed(2)`}
             class="mt-8 grid gap-2"
         >
-            <p>Price: <span class="font-bold">${price}</span></p>
-            <label for=""
-                >Quantity: <input
-                    type="number"
-                    name="qty"
-                    id="qty"
-                    value="1"
-                    class="border border-midnight p-1 rounded-lg w-1/4"
-                /></label
-            >
-            <p>
-                Total: <output for="qty" name="result">${price}</output>
-            </p>
-        </form>
+            <div class="flex items-center justify-between">
+                <p>
+                    Price: <span class="font-bold">${price}</span>
+                </p>
+                <label for="qty" class="w-1/2"
+                    >Quantity:<input
+                        type="number"
+                        name="qty"
+                        id="qty"
+                        value="1"
+                        class="border ml-4 border-midnight p-1 w-1/2 rounded-lg"
+                    /></label
+                >
+            </div>
+            <div class="flex items-center justify-between">
+                <p>
+                    Total: <output for="qty" name="result" class="font-bold"
+                        >${price}</output
+                    >
+                </p>
 
-        <button
-            class="w-1/2 bg-brew hover:opacity-80 transition-all p-4 rounded-lg font-bold text-white"
-            >Buy</button
-        >
+                <button
+                    class="w-1/2 bg-brew hover:opacity-80 transition-all p-4 rounded-lg font-bold text-white"
+                    >Buy</button
+                >
+            </div>
+        </form>
     </section>
 </PageLayout>

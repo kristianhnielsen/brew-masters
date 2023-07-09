@@ -28,6 +28,7 @@ type Product = {
   image: Image;
   type: string;
   description: string;
+  flavor: string;
 };
 
 const postProps = `{
@@ -51,6 +52,7 @@ const productProps = `{
     "image": image.asset -> url,
     "type": type -> title,
     description,
+    flavor,
   }`;
 
 const authorProps = `{
