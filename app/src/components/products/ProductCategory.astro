@@ -1,0 +1,14 @@
+---
+import ProductCardSmall from "./ProductCardSmall.astro";
+const { products, title, id } = Astro.props;
+---
+
+<div class="mt-8" id={id}>
+    <h2 class="font-semibold text-lg opacity-80">{title}</h2>
+    <hr />
+    <div
+        class="grid grid-cols-1 mt-2 justify-items-center md:grid-cols-4 grid-flow-row gap-8"
+    >
+        {products.map((product) => <ProductCardSmall {...product} />)}
+    </div>
+</div>

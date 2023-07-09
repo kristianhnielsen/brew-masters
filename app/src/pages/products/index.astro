@@ -1,9 +1,12 @@
 ---
-import { getProducts } from "../../../sanity";
-import ProductCardSmall from "../../components/products/ProductCardSmall.astro";
+import { getProductsOfType } from "../../../sanity";
+import ProductCategory from "../../components/products/ProductCategory.astro";
 import PageLayout from "../../layouts/PageLayout.astro";
 
-const products = await getProducts();
+const blends = await getProductsOfType("Beans");
+const frenchPress = await getProductsOfType("French Press");
+const coffeeMachine = await getProductsOfType("Coffee Machine");
+const drip = await getProductsOfType("Drip Coffee");
 ---
 
 <PageLayout title="Products" description="">
@@ -13,10 +16,22 @@ const products = await getProducts();
         >
             Products
         </h1>
-        <div
-            class="grid grid-cols-1 justify-items-center md:grid-cols-4 mt-8 grid-flow-row gap-8"
-        >
-            {products.map((product) => <ProductCardSmall {...product} />)}
-        </div>
+
+        <ProductCategory
+            title="Beans And Blends"
+            products={blends}
+            id="beans"
+        />
+        <ProductCategory
+            title="French Press"
+            products={frenchPress}
+            id="french-press"
+        />
+        <ProductCategory title="Drip Coffee" products={drip} id="drip-coffee" />
+        <ProductCategory
+            title="Coffee Machines"
+            products={coffeeMachine}
+            id="coffee-machines"
+        />
     </section>
 </PageLayout>
