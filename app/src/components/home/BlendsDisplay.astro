@@ -1,9 +1,16 @@
 ---
+import { getProductsOfType } from "../../../sanity";
 import SectionLayout from "../../layouts/SectionLayout.astro";
+import ProductCardSmall from "../products/ProductCardSmall.astro";
+const blends = await getProductsOfType("Beans");
 ---
 
 <SectionLayout title="Popular blends" id="products">
-  <div class="mt-8 grid grid-cols-1 justify-items-center gap-10 md:grid-cols-2">
-    <slot />
+  <div class="mt-8 grid grid-cols-1 justify-items-center gap-10 md:grid-cols-3">
+    {
+      blends
+        .filter((blend) => blend.highlight === true)
+        .map((blend) => <ProductCardSmall {...blend} />)
+    }
   </div>
 </SectionLayout>
