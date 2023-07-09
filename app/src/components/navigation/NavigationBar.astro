@@ -1,6 +1,5 @@
 ---
 import SkipToContent from "./SkipToContent.astro";
-const urlIncludes = (path: string): boolean => (Astro.url.pathname.includes(path))
 ---
 
 <header
@@ -34,10 +33,10 @@ const urlIncludes = (path: string): boolean => (Astro.url.pathname.includes(path
         <a href="/" class="hover:underline">Home</a>
       </li>
       <li>
-        <a href="/blog" class:list={[urlIncludes("/blog") ?? "underline"  ,"hover:underline"]}>Blog</a>
+        <a href="/blog" class="hover:underline">Blog</a>
       </li>
       <li>
-        <a href="/#products" class="hover:underline">Products</a>
+        <a href="/products" class="hover:underline">Products</a>
       </li>
       <li>
         <a href="/#about" class="hover:underline">About Us</a>
@@ -78,7 +77,7 @@ const urlIncludes = (path: string): boolean => (Astro.url.pathname.includes(path
 
   // All navigation links in hamburger menu closes the menu when clicked
   navLinks.forEach((link) =>
-    link.addEventListener("click", () => { 
+    link.addEventListener("click", () => {
       if (window.innerWidth < md) {
         navigation?.setAttribute("data-visible", "false");
         hamburgerButton?.setAttribute("aria-expanded", "false");
