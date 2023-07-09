@@ -96,7 +96,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getProductsOfType(type: string): Promise<Product[]> {
   const products = await client.fetch(
-    `*[_type == "product" && type -> title == "${type}"]${productProps}`
+    `*[_type == "product" && type -> title == "${type}"] | order(highlight desc) ${productProps}`
   );
   return products;
 }
