@@ -1,0 +1,22 @@
+---
+import { getProducts } from "../../../sanity";
+import ProductCardSmall from "../../components/products/ProductCardSmall.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const products = await getProducts();
+---
+
+<PageLayout title="Products" description="">
+    <section class="max-w-screen-md mx-auto">
+        <h1
+            class="md:text-2xl mt-8 text-2xl md:text-left text-center font-bold"
+        >
+            Products
+        </h1>
+        <div
+            class="grid grid-cols-1 justify-items-center md:grid-cols-4 mt-8 grid-flow-row gap-8"
+        >
+            {products.map((product) => <ProductCardSmall {...product} />)}
+        </div>
+    </section>
+</PageLayout>

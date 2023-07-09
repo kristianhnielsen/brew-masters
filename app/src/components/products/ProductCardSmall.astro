@@ -1,0 +1,24 @@
+---
+import { urlFor } from "../../../sanity/image";
+const { price, image, name, highlight, slug } = Astro.props;
+---
+
+<product class="flex flex-col p-2 w-48 shadow-md justify-between">
+    <img
+        src={urlFor(image).url()}
+        alt=""
+        class="rounded-lg h-32 object-contain m-auto"
+    />
+    <div class="rounded-lg grid py-2 mt-4">
+        {highlight && <p class="italic font-semibold text-brew">Popular</p>}
+        <p class="overflow-hidden whitespace-nowrap text-ellipsis">
+            {name}
+        </p>
+        <p class="font-semibold text-xl">${price}</p>
+        <a
+            href={`/products/${slug}`}
+            class="p-2 bg-midnight opacity-60 mt-4 transition-opacity ease-out hover:opacity-100 text-white rounded-lg"
+            >Details</a
+        >
+    </div>
+</product>
