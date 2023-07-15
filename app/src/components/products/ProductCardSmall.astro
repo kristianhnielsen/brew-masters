@@ -3,7 +3,9 @@ import { urlFor } from "../../../sanity/image";
 const { price, image, name, highlight, slug } = Astro.props;
 ---
 
-<product class="flex flex-col p-2 w-48 shadow-md justify-between">
+<product
+    class="flex flex-col p-2 w-48 border-gray-100 border-2 shadow rounded-lg justify-between"
+>
     <img
         src={urlFor(image).url()}
         alt=""
