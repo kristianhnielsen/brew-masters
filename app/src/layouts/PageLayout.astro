@@ -12,9 +12,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-pt-24 scroll-smooth">
   <head>
+    <script
+      defer
+      data-domain="brewmasters.coffee"
+      src="https://plausible.io/js/script.js"></script>
+
     <!-- Global Metadata -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
